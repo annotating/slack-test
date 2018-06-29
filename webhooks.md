@@ -8,8 +8,10 @@ After enabling this feature, Slack will generate a Webhook URL for you. To post 
 
 **Example 1**    
 ```
-curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/ETC
-```
+curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/myurl
+
+``` 
+Result: &nbsp; &nbsp; &nbsp;  <img src="images/webhooks-hello.png" width="75%" height="75%" />
 
 **Example 2**  
 You can also add formatting and interactivity to messages. See Slack's [message formatting](https://api.slack.com/docs/message-formatting), and [interactive messages](https://api.slack.com/interactive-messages) pages.
@@ -62,5 +64,6 @@ curl -X POST -H 'Content-type: application/json' --data '{
             ]
         }
     ]
-}' https://hooks.slack.com/services/ETC
+}' https://hooks.slack.com/services/myurl
 ```
+Result: &nbsp; &nbsp; &nbsp;  <img src="images/webhooks-format.png" width="75%" height="75%" />
