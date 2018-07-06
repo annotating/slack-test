@@ -1,9 +1,9 @@
 # Webhooks 
 
-# Adding a webhook
+## Adding a webhook
 Basic Information -> Add features and functionality -> Incoming Webhooks
 
-# Using a webhook
+## Using a webhook
 After enabling this feature, Slack will generate a Webhook URL for you. To post a message, send your message as a JSON POST request.
 
 **Example 1**    
