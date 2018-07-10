@@ -1,0 +1,28 @@
+<html>
+    <head>
+    <title>Geolocation</title>
+    </head>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+        var config = {
+                //apiKey: "AIzaSyDuan7gyT0OzMY7mVq_0WU64ijOCzTNqQY",
+                //authDomain: "metal-air-192104.firebaseapp.com",
+                databaseURL: "https://metal-air-192104.firebaseio.com",
+                //projectId: "metal-air-192104",
+                //storageBucket: "metal-air-192104.appspot.com",
+                //messagingSenderId: "553269808815"
+            };
+            firebase.initializeApp(config);
+            var database = firebase.database();
+
+            var mapId = 'map456';
+
+            // read
+            var map456 = database.ref('slack-maps/'+mapId);
+            map456.once('value').then(function(snapshot) {
+                let markerData = snapshot.val();
+                console.log('init', markerData);
+            });
+    
+    </script>
+</html>
