@@ -2,7 +2,7 @@
 
 type route =
   | Page1(string)
-  | Page2(string);
+  | Page2(string)
 
 type state = {route};
 
@@ -14,22 +14,32 @@ let reducer = (action, _state) =>
   | ChangeRoute(route) => ReasonReact.Update({route: route})
   };
 
-let mapUrlToRoute = (url: ReasonReact.Router.url) => {
-    let stringPath = List.fold_left((a,b)=>(a++"/"++b), "", url.path);
-    Js.log(stringPath);
-    switch url.path {
-    | ["\#", "page1"] => Page1("page1")
-    | ["\#", "page2"] => Page2("page2")
-    | _ => Page1("no match. you entered: " ++ stringPath)
-    };
+let mapHashToRoute = (hash: string) => {
+  let params = Js.String.split("/", hash);
+  switch (params) {
+    | [|"", mapId, markerId|] => Page1(mapId ++ " and " ++ markerId)
+    | _ => Page1("no match")
   }
+} 
+
+let mapUrlToRoute = (url: ReasonReact.Router.url) => {
+  let stringPath = List.fold_left((a,b)=>(a++"/"++b), "", url.path);
+  switch url.path {
+  | [] => mapHashToRoute(url.hash)
+  | ["page1"] => Page1("page1")
+  | ["page2"] => Page2("page2")
+  | _ => Page1("no match. you entered: " ++ stringPath)
+  };
+}
 
 let component = ReasonReact.reducerComponent("App");
 
 let make = (_children) => {
   ...component,
   reducer,
-  initialState: () => {route: Page1("home")},
+  initialState: () => {
+    route: ReasonReact.Router.dangerouslyGetInitialUrl() |> mapUrlToRoute
+  },
   subscriptions: self => [
     Sub(
       () =>
